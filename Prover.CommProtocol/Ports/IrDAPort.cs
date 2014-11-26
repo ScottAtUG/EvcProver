@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Prover.MiSerialProtocol.Ports
+namespace Prover.InstrumentCommunication.Ports
 {
-    class IrDAPort : IPort
+    public class IrDaPort : IPort
     {
         public bool IsOpen()
         {
