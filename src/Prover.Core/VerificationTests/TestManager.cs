@@ -34,7 +34,7 @@ namespace Prover.Core.VerificationTests
             var items = new InstrumentItems(instrumentType);
             await instrumentComm.DownloadItemsAsync(items);
             var instrument = new Instrument(instrumentType, items);
-
+            BuildCorrectorTypes(instrument);
             return new TestManager(container, instrument, instrumentComm, tachComm);
         }
 
@@ -127,6 +127,50 @@ namespace Prover.Core.VerificationTests
         public void StopVolumeTest()
         {
             VolumeTest.StopRunningTest();
+        }
+
+        private static void BuildCorrectorTypes(Instrument instrument)
+        {
+            if (instrument.CorrectorType == CorrectorType.PressureOnly)
+            {
+                instrument.Pressure = new Pressure(instrument);
+                instrument.Pressure.AddTest();
+                instrument.Pressure.AddTest();
+                instrument.Pressure.AddTest();
+
+                instrument.VerificationTests.Add(new VerificationTest(0, instrument, null, instrument.Pressure.Tests[0]));
+                instrument.VerificationTests.Add(new VerificationTest(1, instrument, null, instrument.Pressure.Tests[1]));
+                instrument.VerificationTests.Add(new VerificationTest(2, instrument, null, instrument.Pressure.Tests[2]));
+            }
+
+            if (instrument.CorrectorType == CorrectorType.TemperatureOnly)
+            {
+                instrument.Temperature = new Temperature(instrument);
+                instrument.Temperature.AddTemperatureTest();
+                instrument.Temperature.AddTemperatureTest();
+                instrument.Temperature.AddTemperatureTest();
+
+                instrument.VerificationTests.Add(new VerificationTest(0, instrument, instrument.Temperature.Tests[0], null));
+                instrument.VerificationTests.Add(new VerificationTest(1, instrument, instrument.Temperature.Tests[1], null));
+                instrument.VerificationTests.Add(new VerificationTest(2, instrument, instrument.Temperature.Tests[2], null));
+            }
+
+            if (instrument.CorrectorType == CorrectorType.PressureTemperature)
+            {
+                instrument.Temperature = new Temperature(instrument);
+                instrument.Temperature.AddTemperatureTest();
+                instrument.Temperature.AddTemperatureTest();
+                instrument.Temperature.AddTemperatureTest();
+
+                instrument.Pressure = new Pressure(instrument);
+                instrument.Pressure.AddTest();
+                instrument.Pressure.AddTest();
+                instrument.Pressure.AddTest();
+
+                instrument.VerificationTests.Add(new VerificationTest(0, instrument, instrument.Temperature.Tests[0], instrument.Pressure.Tests[0]));
+                instrument.VerificationTests.Add(new VerificationTest(1, instrument, instrument.Temperature.Tests[1], instrument.Pressure.Tests[1]));
+                instrument.VerificationTests.Add(new VerificationTest(2, instrument, instrument.Temperature.Tests[2], instrument.Pressure.Tests[2]));
+            }
         }
     }
 }

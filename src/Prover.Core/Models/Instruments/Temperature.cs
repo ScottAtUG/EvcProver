@@ -53,10 +53,25 @@ namespace Prover.Core.Models.Instruments
             if (Tests.Count() >= 3)
                 throw new NotSupportedException("Only 3 test instances are supported.");
 
-            var test = new TemperatureTest(this, Tests.Count() == 2);
+            var test = new TemperatureTest(this, Tests.Count() == 2, GetDefaultGauge(Tests.Count()));
             Tests.Add(test);
 
             return test;
+        }
+
+        private double GetDefaultGauge(int level)
+        {
+            switch (level)
+            {
+                case 2:
+                    return 32;
+                case 1:
+                    return 60;
+                case 0:
+                    return 90;
+                default:
+                    return 0;
+            }
         }
     }
 }

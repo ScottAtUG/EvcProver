@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using Prover.Core.Communication;
 using Prover.Core.Models.Certificates;
 using Prover.SerialProtocol;
+using Prover.Core.VerificationTests;
 
 namespace Prover.Core.Models.Instruments
 {
@@ -42,18 +43,13 @@ namespace Prover.Core.Models.Instruments
         {
         }
 
-        public Instrument(InstrumentType type)
-        {
-            Items = new InstrumentItems(type);
-            Type = type;
-        }
-
-        public Instrument(InstrumentType type, InstrumentItems items) : base(items)
+        public Instrument(InstrumentType type, InstrumentItems items)
         {
             TestDateTime = DateTime.Now;
             Type = type;
             CertificateId = null;
-            BuildCorrectorTypes();
+
+            Volume = new Volume(this);
         }
 
         public DateTime TestDateTime { get; set; }
@@ -81,7 +77,7 @@ namespace Prover.Core.Models.Instruments
         public virtual List<SuperFactor> SuperFactorTests { get; set; }
         [NotMapped]
         public List<VerificationTest> VerificationTests { get; set; } = new List<VerificationTest>();
-        public virtual Volume Volume { get; set; }
+        public Volume Volume { get; set; }
 
         #region NotMapped Properties
         [NotMapped]
@@ -182,66 +178,5 @@ namespace Prover.Core.Models.Instruments
         }
         #endregion      
 
-        private void BuildCorrectorTypes()
-        {
-            if (CorrectorType == CorrectorType.PressureOnly)
-            {
-                Pressure = new Pressure(this);
-                Pressure.AddTest();
-                Pressure.AddTest();
-                Pressure.AddTest();
-
-                VerificationTests.Add(new VerificationTest(0, this, null, Pressure.Tests[0]));
-                VerificationTests.Add(new VerificationTest(1, this, null, Pressure.Tests[1]));
-                VerificationTests.Add(new VerificationTest(2, this, null, Pressure.Tests[2]));
-            }
-
-            if (CorrectorType == CorrectorType.TemperatureOnly)
-            {
-                Temperature = new Temperature(this);
-                Temperature.AddTemperatureTest();
-                Temperature.AddTemperatureTest();
-                Temperature.AddTemperatureTest();
-
-                VerificationTests.Add(new VerificationTest(0, this, Temperature.Tests[0], null));
-                VerificationTests.Add(new VerificationTest(1, this, Temperature.Tests[1], null));
-                VerificationTests.Add(new VerificationTest(2, this, Temperature.Tests[2], null));
-            }
-
-            if (CorrectorType == CorrectorType.PressureTemperature)
-            {
-                Temperature = new Temperature(this);
-                Temperature.AddTemperatureTest();
-                Temperature.AddTemperatureTest();
-                Temperature.AddTemperatureTest();
-
-                Pressure = new Pressure(this);
-                Pressure.AddTest();
-                Pressure.AddTest();
-                Pressure.AddTest();
-
-                VerificationTests.Add(new VerificationTest(0, this, Temperature.Tests[0], Pressure.Tests[0]));
-                VerificationTests.Add(new VerificationTest(1, this, Temperature.Tests[1], Pressure.Tests[1]));
-                VerificationTests.Add(new VerificationTest(2, this, Temperature.Tests[2], Pressure.Tests[2]));              
-            }
-            
-            Volume = new Volume(this);
-        }
-
-        public class VerificationTest
-        {
-            public VerificationTest(int level, Instrument instrument, TemperatureTest temperature, PressureTest pressure)
-            {
-                TestNumber = level;
-                TemperatureTest = temperature;
-                PressureTest = pressure;
-                SuperTest = new SuperFactor(instrument, TemperatureTest, PressureTest);
-            }
-
-            public PressureTest PressureTest { get; private set; }
-            public SuperFactor SuperTest { get; private set; }
-            public TemperatureTest TemperatureTest { get; private set; }
-            public int TestNumber { get; private set; }
-        }
     }
 }

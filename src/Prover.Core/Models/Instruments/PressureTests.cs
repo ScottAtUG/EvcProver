@@ -102,28 +102,5 @@ namespace Prover.Core.Models.Instruments
         {
             get { return (PercentError < 1 && PercentError > -1); }
         }
-
-        //public void SetDefaultGauge(PressureLevel level)
-        //{
-        //    int percent;
-
-        //    switch (level)
-        //    {
-        //        case PressureLevel.Low:
-        //            percent = 20;
-        //            break;
-        //        case PressureLevel.Medium:
-        //            percent = 50;
-        //            break;
-        //        case PressureLevel.High:
-        //            percent = 80;
-        //            break;
-        //        default:
-        //            percent = 0;
-        //            break;
-        //    }
-
-        //    GasGauge = ((decimal)percent / 100) * Pressure.EvcPressureRange;
-        //}
     }
 }

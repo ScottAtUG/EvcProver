@@ -20,9 +20,9 @@ namespace Prover.GUI.ViewModels.PTVerificationViews
     {
         private IUnityContainer _container;
         private Instrument _instrument;
-        private Instrument.VerificationTest _verificationTest;
+        private VerificationTest _verificationTest;
 
-        public PTVerificationSetViewModel(IUnityContainer container, Instrument instrument, Instrument.VerificationTest verificationTest)
+        public PTVerificationSetViewModel(IUnityContainer container, Instrument instrument, VerificationTest verificationTest)
         {
             _container = container;
             VerificationTest = verificationTest;
@@ -33,7 +33,7 @@ namespace Prover.GUI.ViewModels.PTVerificationViews
             _container.Resolve<IEventAggregator>().Subscribe(this);
         }
 
-        public PTVerificationSetViewModel(IUnityContainer container, TestManager instrumentManager, Instrument.VerificationTest verificationTest)
+        public PTVerificationSetViewModel(IUnityContainer container, TestManager instrumentManager, VerificationTest verificationTest)
             :this(container, instrumentManager.Instrument, verificationTest)
         {
         }
@@ -71,7 +71,7 @@ namespace Prover.GUI.ViewModels.PTVerificationViews
         public SuperTestViewModel SuperFactorTestViewModel { get; private set; }
 
         public TestManager InstrumentManager { get; private set; }
-        public Instrument.VerificationTest VerificationTest { get; private set; }
+        public VerificationTest VerificationTest { get; private set; }
 
         public async Task DownloadItems()
         {

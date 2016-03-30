@@ -19,4 +19,20 @@ namespace Prover.Core.VerificationTests
             _instrumentCommunicator = instrumentComm;
         }
     }
+
+    public class VerificationTest
+    {
+        public VerificationTest(int level, Instrument instrument, TemperatureTest temperature, PressureTest pressure)
+        {
+            TestNumber = level;
+            TemperatureTest = temperature;
+            PressureTest = pressure;
+            SuperTest = new SuperFactor(instrument, TemperatureTest, PressureTest);
+        }
+
+        public PressureTest PressureTest { get; private set; }
+        public SuperFactor SuperTest { get; private set; }
+        public TemperatureTest TemperatureTest { get; private set; }
+        public int TestNumber { get; private set; }
+    }
 }

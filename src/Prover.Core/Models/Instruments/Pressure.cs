@@ -110,10 +110,35 @@ namespace Prover.Core.Models.Instruments
             if (Tests.Count() >= 3)
                 throw new NotSupportedException("Only 3 test instances are supported.");
 
-            var test = new PressureTest(this, Tests.Count() == 2);
+            var test = new PressureTest(this, Tests.Count() == 2, GetDefaultGauge(Tests.Count()));
             Tests.Add(test);
 
             return test;
+        }
+
+        private decimal GetDefaultGauge(int level)
+        {
+
+            int percent;
+
+            switch (level)
+            {
+                case 0:
+                    percent = 20;
+                    break;
+                case 1:
+                    percent = 50;
+                    break;
+                case 2:
+                    percent = 80;
+                    break;
+                default:
+                    percent = 0;
+                    break;
+            }
+
+            return EvcPressureRange.HasValue ? ((decimal)percent / 100) * EvcPressureRange.Value : 0m;
+
         }
     }
 }
