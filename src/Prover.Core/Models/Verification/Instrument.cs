@@ -13,9 +13,9 @@ using Newtonsoft.Json;
 using Prover.Core.Communication;
 using Prover.Core.Models.Certificates;
 using Prover.SerialProtocol;
-using Prover.Core.VerificationTests;
+using Prover.Core.Models.Verification.Volume;
 
-namespace Prover.Core.Models.Instruments
+namespace Prover.Core.Models.Verification
 {
     public enum InstrumentType
     {
@@ -31,7 +31,7 @@ namespace Prover.Core.Models.Instruments
         PressureTemperature
     }
 
-    public class Instrument : InstrumentTable
+    public class Instrument : DomainTable
     {
         private int FIXED_PRESSURE_FACTOR = 109;
         private int FIXED_SUPER_FACTOR = 110;
@@ -43,13 +43,18 @@ namespace Prover.Core.Models.Instruments
         {
         }
 
-        public Instrument(InstrumentType type, InstrumentItems items)
+        public Instrument(InstrumentType type)
+        {
+            Items = new InstrumentItems(type);
+            Type = type;
+        }
+
+        public Instrument(InstrumentType type, InstrumentItems items) : base(items)
         {
             TestDateTime = DateTime.Now;
             Type = type;
             CertificateId = null;
-
-            Volume = new Volume(this);
+            BuildCorrectorTypes();
         }
 
         public DateTime TestDateTime { get; set; }
@@ -71,13 +76,8 @@ namespace Prover.Core.Models.Instruments
         public Guid? CertificateId { get; set; }
         public Certificate Certificate { get; set; }
 
-        public virtual Pressure Pressure { get; set; }
-        public virtual Temperature Temperature { get; set; }
-        [NotMapped]
-        public virtual List<SuperFactor> SuperFactorTests { get; set; }
-        [NotMapped]
-        public List<VerificationTest> VerificationTests { get; set; } = new List<VerificationTest>();
-        public Volume Volume { get; set; }
+        public List<LevelVerification> VerificationSets { get; set; } = new List<LevelVerification>();
+        public virtual VolumeVerification Volume { get; set; }
 
         #region NotMapped Properties
         [NotMapped]
@@ -161,22 +161,22 @@ namespace Prover.Core.Models.Instruments
         {
             get
             {
-                if (Volume != null)
-                {
-                    if (CorrectorType == CorrectorType.TemperatureOnly && Temperature != null)
-                        return Temperature.HasPassed && Volume.HasPassed;
-
-                    if (CorrectorType == CorrectorType.PressureOnly && Pressure != null)
-                        return Pressure.HasPassed && Volume.HasPassed;
-
-                    if (CorrectorType == CorrectorType.PressureTemperature && Pressure != null && Temperature != null)
-                        return Temperature.HasPassed && Volume.HasPassed && Pressure.HasPassed;
-                }             
-
                 return false;
             }
         }
         #endregion      
 
+        private void BuildCorrectorTypes()
+        {
+            VerificationSets = new List<LevelVerification>();
+
+            VerificationSets.Add(LevelVerification.Create(TestLevel.One, this));
+            VerificationSets.Add(LevelVerification.Create(TestLevel.Two, this));
+
+            var volumeVerification = LevelVerification.Create(TestLevel.Three, this);
+            VerificationSets.Add(volumeVerification);
+
+            Volume = VolumeVerification.Create(this, volumeVerification);
+        }
     }
 }

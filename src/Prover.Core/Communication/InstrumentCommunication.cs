@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Practices.ObjectBuilder2;
 using Prover.Core.Storage;
 using Prover.SerialProtocol;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using System.Windows;
 using Prover.Core.Models;
 

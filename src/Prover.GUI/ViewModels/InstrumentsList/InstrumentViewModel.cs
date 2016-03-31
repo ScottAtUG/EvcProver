@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using Caliburn.Micro.ReactiveUI;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 
 namespace Prover.GUI.ViewModels.InstrumentsList
 {

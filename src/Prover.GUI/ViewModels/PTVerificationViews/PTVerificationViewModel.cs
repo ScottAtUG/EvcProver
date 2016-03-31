@@ -5,9 +5,9 @@ using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Prover.Core.Communication;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Prover.GUI.Events;
-using Prover.Core.VerificationTests;
+using Prover.Core.VerificationManagers;
 using System.Linq;
 
 namespace Prover.GUI.ViewModels.PTVerificationViews
@@ -28,7 +28,7 @@ namespace Prover.GUI.ViewModels.PTVerificationViews
 
             TestViews = new ObservableCollection<PTVerificationSetViewModel>();
 
-            instrument.VerificationTests.OrderBy(v => v.TestNumber).ForEach(x =>
+            instrument.VerificationSets.OrderBy(v => v.TestNumber).ForEach(x =>
                 TestViews.Add(new PTVerificationSetViewModel(_container, instrument, x)));
         }
 
@@ -37,7 +37,7 @@ namespace Prover.GUI.ViewModels.PTVerificationViews
             InstrumentManager = instrumentTestManager;
             Instrument = InstrumentManager.Instrument;
 
-            InstrumentManager.Instrument.VerificationTests.ForEach(x =>
+            InstrumentManager.Instrument.VerificationSets.ForEach(x =>
                 TestViews.Add(new PTVerificationSetViewModel(_container, InstrumentManager, x))
             );
         }
@@ -58,7 +58,7 @@ namespace Prover.GUI.ViewModels.PTVerificationViews
         {
             InstrumentManager = message.InstrumentManager;
 
-            InstrumentManager.Instrument.VerificationTests.ForEach(x =>
+            InstrumentManager.Instrument.VerificationSets.ForEach(x =>
                 TestViews.Add(new PTVerificationSetViewModel(_container, InstrumentManager, x))
             );
 

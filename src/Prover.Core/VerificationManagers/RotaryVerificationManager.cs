@@ -3,15 +3,16 @@ using NLog;
 using Prover.Core.Communication;
 using Prover.Core.ExternalDevices.DInOutBoards;
 using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Prover.Core.VerificationTests
+namespace Prover.Core.VerificationManagers
 {
-    sealed class RotaryVolumeVerification : VerificationBase
+    internal class RotaryVerificationManager
     {
         private Logger _log = LogManager.GetCurrentClassLogger();
         private bool _isFirstVolumeTest = true;
@@ -21,11 +22,15 @@ namespace Prover.Core.VerificationTests
         private IDInOutBoard _firstPortAInputBoard;
         private IDInOutBoard _firstPortBInputBoard;
         private TachometerCommunicator _tachometerCommunicator;
+        protected InstrumentCommunicator _instrumentCommunicator;
+        protected Instrument _instrument;
         private bool _stopTest;
 
-        public RotaryVolumeVerification(Instrument instrument, InstrumentCommunicator instrumentComm, TachometerCommunicator tachComm)
-            :base(instrument, instrumentComm)
+        public RotaryVerificationManager(Instrument instrument, InstrumentCommunicator instrumentComm, TachometerCommunicator tachComm)
         {
+            _instrument = instrument;
+            _instrumentCommunicator = instrumentComm;
+
             _tachometerCommunicator = tachComm;
 
             _outputBoard = DInOutBoardFactory.CreateBoard(0, 0, 0);

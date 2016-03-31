@@ -7,7 +7,7 @@ using Prover.Core.Events;
 using Prover.GUI.Events;
 using System.Windows;
 using System;
-using Prover.Core.VerificationTests;
+using Prover.Core.VerificationManagers;
 
 namespace Prover.GUI.ViewModels.TemperatureViews
 {

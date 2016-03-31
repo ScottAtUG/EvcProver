@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
 using Prover.Core.Models.Certificates;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using System.Windows.Documents;
 using System.Windows;
 using System.IO;

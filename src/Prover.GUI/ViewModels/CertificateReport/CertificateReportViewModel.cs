@@ -10,7 +10,7 @@ using System.Windows.Xps.Packaging;
 using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.Unity;
 using Prover.Core.Models.Certificates;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Prover.Core.Storage;
 using Prover.GUI.ViewModels.InstrumentsList;
 using Prover.GUI.Views.CertificateReport;

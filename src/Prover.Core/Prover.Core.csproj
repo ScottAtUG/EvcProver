@@ -114,12 +114,6 @@
     <Compile Include="Events\CommunicationStatusEvent.cs" />
     <Compile Include="ExternalDevices\DInOutBoards\DataAcqBoard.cs" />
     <Compile Include="Communication\InstrumentCommunication.cs" />
-    <Compile Include="Migrations\201603300541401_refactor-pt.cs" />
-    <Compile Include="Migrations\201603300541401_refactor-pt.Designer.cs">
-      <DependentUpon>201603300541401_refactor-pt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VerificationTests\PressureTemperatureVerification.cs" />
-    <Compile Include="VerificationTests\TestManager.cs" />
     <Compile Include="Communication\TachometerCommunication.cs" />
     <Compile Include="Events\LiveReadEvent.cs" />
     <Compile Include="Events\SettingsChangeEvent.cs" />
@@ -129,25 +123,18 @@
     <Compile Include="ExternalDevices\DInOutBoards\EmptyDInOutBoard.cs" />
     <Compile Include="ExternalDevices\DInOutBoards\IDInOutBoard.cs" />
     <Compile Include="IO\FileSystem.cs" />
-    <Compile Include="Migrations\201510030033541_InitialCreate.cs" />
-    <Compile Include="Migrations\201510030033541_InitialCreate.Designer.cs">
-      <DependentUpon>201510030033541_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603070654013_PressureMigration.cs" />
-    <Compile Include="Migrations\201603070654013_PressureMigration.Designer.cs">
-      <DependentUpon>201603070654013_PressureMigration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Certificates\Certificate.cs" />
-    <Compile Include="Models\Instruments\InstrumentTable.cs" />
-    <Compile Include="Models\Instruments\Instrument.cs" />
-    <Compile Include="Models\Instruments\MeterIndexes.cs" />
-    <Compile Include="Models\Instruments\Pressure.cs" />
-    <Compile Include="Models\Instruments\PressureTests.cs" />
-    <Compile Include="Models\Instruments\SuperFactor.cs" />
-    <Compile Include="Models\Instruments\Temperature.cs" />
-    <Compile Include="Models\Instruments\TemperatureTests.cs" />
-    <Compile Include="Models\Instruments\Volume.cs" />
+    <Compile Include="Models\Verification\DomainTable.cs" />
+    <Compile Include="Models\Verification\Instrument.cs" />
+    <Compile Include="Models\Verification\MeterIndexes.cs" />
+    <Compile Include="Models\Verification\PTZ\PVerification.cs" />
+    <Compile Include="Models\Verification\PTZ\ZVerification.cs" />
+    <Compile Include="Models\Verification\PTZ\TVerification.cs" />
+    <Compile Include="Models\Verification\PTZLevelVerification.cs" />
+    <Compile Include="Models\Verification\PTZ\PTZBase.cs" />
+    <Compile Include="Models\Verification\Volume\RotaryVolume.cs" />
+    <Compile Include="Models\Verification\Volume\VolumeVerification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\InstrumentItem.cs" />
     <Compile Include="Settings\InstrumentItems\ItemLoader.cs" />
@@ -159,14 +146,12 @@
     <Compile Include="Storage\InstrumentStore.cs" />
     <Compile Include="Storage\IProverContext.cs" />
     <Compile Include="Storage\ProverContext.cs" />
-    <Compile Include="VerificationTests\VerificationTest.cs" />
-    <Compile Include="VerificationTests\VolumeVerification.cs" />
+    <Compile Include="VerificationManagers\RotaryVerificationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="App.config" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -175,7 +160,7 @@
   <ItemGroup>
     <ProjectReference Include="..\serialprotocol\miSerialProtocol\Prover.CommProtocol.MiSerialProtocol.vbproj">
       <Project>{8c7e475a-15bb-477b-99f3-7b2abf41e43f}</Project>
-      <Name>Prover.CommProtocol.MiSerialProtocol</Name>
+      <Name>Prover.SerialProtocol</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -186,24 +171,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510030033541_InitialCreate.resx">
-      <DependentUpon>201510030033541_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603070654013_PressureMigration.resx">
-      <DependentUpon>201603070654013_PressureMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603300541401_refactor-pt.resx">
-      <DependentUpon>201603300541401_refactor-pt.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
     if not exist "$(TargetDir)x86" md "$(TargetDir)x86"
-    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8854.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
     if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
-    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8854.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,4 +1,4 @@
-﻿using Prover.Core.Models.Instruments;
+﻿using Prover.Core.Models.Verification;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

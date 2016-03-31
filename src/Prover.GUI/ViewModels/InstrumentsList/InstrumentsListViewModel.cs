@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.Unity;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Prover.Core.Storage;
 
 namespace Prover.GUI.ViewModels.InstrumentsList

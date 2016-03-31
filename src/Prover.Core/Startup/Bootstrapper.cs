@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Microsoft.Practices.Unity;
 using Prover.Core.Models.Certificates;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Prover.Core.Storage;
 using Caliburn.Micro;
 using System.Data.Entity;

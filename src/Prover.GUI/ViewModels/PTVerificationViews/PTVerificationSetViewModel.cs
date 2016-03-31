@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
 using Prover.Core.Communication;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Caliburn.Micro;
 using Prover.GUI.Events;
 using Prover.GUI.ViewModels.TemperatureViews;
 using Prover.GUI.ViewModels.PressureViews;
 using Prover.GUI.ViewModels.SuperFactorViews;
-using Prover.Core.VerificationTests;
+using Prover.Core.VerificationManagers;
 
 namespace Prover.GUI.ViewModels.PTVerificationViews
 {

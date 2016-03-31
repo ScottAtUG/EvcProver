@@ -8,7 +8,7 @@ using Caliburn.Micro;
 using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.Unity;
 using Prover.Core.Communication;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Prover.GUI.Events;
 using Prover.GUI.Properties;
 using Prover.GUI.ViewModels.TemperatureViews;
@@ -23,7 +23,7 @@ using Prover.GUI.Reporting;
 using Prover.GUI.ViewModels.PressureViews;
 using Prover.GUI.ViewModels.PTVerificationViews;
 using MaterialDesignThemes.Wpf;
-using Prover.Core.VerificationTests;
+using Prover.Core.VerificationManagers;
 
 namespace Prover.GUI.ViewModels
 {

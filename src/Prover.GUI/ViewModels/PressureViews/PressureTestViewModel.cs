@@ -4,7 +4,7 @@ using MaterialDesignThemes.Wpf;
 using Microsoft.Practices.Unity;
 using NLog;
 using Prover.Core.Communication;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Prover.GUI.Events;
 using Prover.GUI.Views;
 using System;
@@ -21,12 +21,12 @@ namespace Prover.GUI.ViewModels.PressureViews
         private IUnityContainer _container;
         private readonly Logger _log = NLog.LogManager.GetCurrentClassLogger();
         public bool ShowCommButton { get; }
-        public PressureTest Test { get; set; }
+        public PVerification Test { get; set; }
 
         public bool ShowGaugeDecimalControl => ShowCommButton;
         public bool ShowGaugeText => !ShowCommButton;
 
-        public PressureTestViewModel(IUnityContainer container, PressureTest test, bool showCommButton = true)
+        public PressureTestViewModel(IUnityContainer container, PVerification test, bool showCommButton = true)
         {
             _container = container;
             Test = test;

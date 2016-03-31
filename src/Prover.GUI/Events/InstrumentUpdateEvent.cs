@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Prover.Core.Communication;
-using Prover.Core.Models.Instruments;
-using Prover.Core.VerificationTests;
+using Prover.Core.Models.Verification;
+using Prover.Core.VerificationManagers;
 
 namespace Prover.GUI.Events
 {

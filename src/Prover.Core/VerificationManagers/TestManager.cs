@@ -65,7 +65,7 @@ namespace Prover.Core.VerificationTests
         {
             if (_isLiveReading) await StopLiveRead();
 
-            var test = Instrument.VerificationTests.FirstOrDefault(x => x.TestNumber == levelNumber).TemperatureTest;
+            var test = Instrument.VerificationSets.FirstOrDefault(x => x.TestNumber == levelNumber).TemperatureTest;
             if (test != null)
                 test.Items.InstrumentValues = await InstrumentCommunicator.DownloadItemsAsync(test.Items.Items);
   
@@ -76,7 +76,7 @@ namespace Prover.Core.VerificationTests
         {
             if (_isLiveReading) await StopLiveRead();
 
-            var test = Instrument.VerificationTests.FirstOrDefault(x => x.TestNumber == level).PressureTest;
+            var test = Instrument.VerificationSets.FirstOrDefault(x => x.TestNumber == level).PressureTest;
             if (test != null)
                 test.Items.InstrumentValues = await InstrumentCommunicator.DownloadItemsAsync(test.Items.Items);
 
@@ -138,9 +138,9 @@ namespace Prover.Core.VerificationTests
                 instrument.Pressure.AddTest();
                 instrument.Pressure.AddTest();
 
-                instrument.VerificationTests.Add(new VerificationTest(0, instrument, null, instrument.Pressure.Tests[0]));
-                instrument.VerificationTests.Add(new VerificationTest(1, instrument, null, instrument.Pressure.Tests[1]));
-                instrument.VerificationTests.Add(new VerificationTest(2, instrument, null, instrument.Pressure.Tests[2]));
+                instrument.VerificationSets.Add(new VerificationTest(0, instrument, null, instrument.Pressure.Tests[0]));
+                instrument.VerificationSets.Add(new VerificationTest(1, instrument, null, instrument.Pressure.Tests[1]));
+                instrument.VerificationSets.Add(new VerificationTest(2, instrument, null, instrument.Pressure.Tests[2]));
             }
 
             if (instrument.CorrectorType == CorrectorType.TemperatureOnly)
@@ -150,9 +150,9 @@ namespace Prover.Core.VerificationTests
                 instrument.Temperature.AddTemperatureTest();
                 instrument.Temperature.AddTemperatureTest();
 
-                instrument.VerificationTests.Add(new VerificationTest(0, instrument, instrument.Temperature.Tests[0], null));
-                instrument.VerificationTests.Add(new VerificationTest(1, instrument, instrument.Temperature.Tests[1], null));
-                instrument.VerificationTests.Add(new VerificationTest(2, instrument, instrument.Temperature.Tests[2], null));
+                instrument.VerificationSets.Add(new VerificationTest(0, instrument, instrument.Temperature.Tests[0], null));
+                instrument.VerificationSets.Add(new VerificationTest(1, instrument, instrument.Temperature.Tests[1], null));
+                instrument.VerificationSets.Add(new VerificationTest(2, instrument, instrument.Temperature.Tests[2], null));
             }
 
             if (instrument.CorrectorType == CorrectorType.PressureTemperature)
@@ -167,9 +167,9 @@ namespace Prover.Core.VerificationTests
                 instrument.Pressure.AddTest();
                 instrument.Pressure.AddTest();
 
-                instrument.VerificationTests.Add(new VerificationTest(0, instrument, instrument.Temperature.Tests[0], instrument.Pressure.Tests[0]));
-                instrument.VerificationTests.Add(new VerificationTest(1, instrument, instrument.Temperature.Tests[1], instrument.Pressure.Tests[1]));
-                instrument.VerificationTests.Add(new VerificationTest(2, instrument, instrument.Temperature.Tests[2], instrument.Pressure.Tests[2]));
+                instrument.VerificationSets.Add(new VerificationTest(0, instrument, instrument.Temperature.Tests[0], instrument.Pressure.Tests[0]));
+                instrument.VerificationSets.Add(new VerificationTest(1, instrument, instrument.Temperature.Tests[1], instrument.Pressure.Tests[1]));
+                instrument.VerificationSets.Add(new VerificationTest(2, instrument, instrument.Temperature.Tests[2], instrument.Pressure.Tests[2]));
             }
         }
     }

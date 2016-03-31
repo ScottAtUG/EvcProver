@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Microsoft.Practices.Unity;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Prover.Core.Startup;
 using Prover.Core.Storage;
 

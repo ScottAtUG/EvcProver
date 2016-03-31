@@ -3,7 +3,7 @@ using Caliburn.Micro;
 using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.Unity;
 using Prover.Core.Communication;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Prover.GUI.Events;
 using System.Windows.Media;
 using System;
@@ -16,12 +16,12 @@ namespace Prover.GUI.ViewModels.TemperatureViews
         private IUnityContainer _container;
         private readonly Logger _log = NLog.LogManager.GetCurrentClassLogger();
         public bool ShowCommButton { get; }
-        public TemperatureTest Test { get; set; }
+        public TVerification Test { get; set; }
 
         public bool ShowGaugeDecimalControl => ShowCommButton;
         public bool ShowGaugeText => !ShowCommButton;
 
-        public TemperatureTestViewModel(IUnityContainer container, TemperatureTest test, bool showCommButton = true)
+        public TemperatureTestViewModel(IUnityContainer container, TVerification test, bool showCommButton = true)
         {
             _container = container;
             Test = test;

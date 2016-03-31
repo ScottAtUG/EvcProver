@@ -5,9 +5,9 @@ using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Prover.Core.Communication;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Prover.GUI.Events;
-using Prover.Core.VerificationTests;
+using Prover.Core.VerificationManagers;
 
 namespace Prover.GUI.ViewModels.TemperatureViews
 {

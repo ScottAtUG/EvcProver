@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 
 namespace Prover.Core.Storage
 {

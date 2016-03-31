@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Prover.Core.Storage;
 
 namespace Prover.Core.Models.Certificates
@@ -25,7 +25,7 @@ namespace Prover.Core.Models.Certificates
         public string TestedBy { get; set; }
         public long Number { get; set; }
 
-        public virtual ICollection<Instrument> Instruments { get; set; }
+        public virtual ICollection<Verification.Instrument> Instruments { get; set; }
 
         [NotMapped]
         public string SealExpirationDate
@@ -48,7 +48,7 @@ namespace Prover.Core.Models.Certificates
             get { return Instruments.Count(); }
         }
 
-        public static Certificate CreateCertificate(IUnityContainer container, string testedBy, string verificationType, List<Instrument> instruments)
+        public static Certificate CreateCertificate(IUnityContainer container, string testedBy, string verificationType, List<Verification.Instrument> instruments)
         {
 
             var certificateStore = new CertificateStore(container);
@@ -60,7 +60,7 @@ namespace Prover.Core.Models.Certificates
                 VerificationType = verificationType,
                 TestedBy = testedBy,
                 Number = number,
-                Instruments = new Collection<Instrument>()
+                Instruments = new Collection<Verification.Instrument>()
             };
 
             instruments.ForEach(i =>

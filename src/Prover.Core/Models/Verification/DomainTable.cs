@@ -9,16 +9,16 @@ using System.Xml.Linq;
 using Newtonsoft.Json;
 using Prover.Core.Extensions;
 
-namespace Prover.Core.Models.Instruments
+namespace Prover.Core.Models.Verification
 {
-    public abstract class InstrumentTable
+    public abstract class DomainTable
     {
-        protected InstrumentTable()
+        protected DomainTable()
         {
             Id = Guid.NewGuid();
         }
 
-        protected InstrumentTable(InstrumentItems items) : this()
+        protected DomainTable(InstrumentItems items) : this()
         {
             Items = items;
         }

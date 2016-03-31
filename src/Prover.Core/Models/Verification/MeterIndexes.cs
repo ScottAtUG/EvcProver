@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Prover.Core.Models.Instruments
+namespace Prover.Core.Models.Verification
 {
     public class MeterIndexInfo
     {

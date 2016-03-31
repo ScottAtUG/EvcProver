@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 
 namespace Prover.Core.Storage
 {

@@ -1,6 +1,6 @@
 ﻿using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.Unity;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Prover.GUI.ViewModels.PTVerificationViews;
 using Prover.GUI.ViewModels.TemperatureViews;
 using System;

@@ -3,7 +3,7 @@ using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.Unity;
 using Prover.Core.Communication;
 using Prover.Core.Events;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using Prover.Core.Settings;
 using Prover.GUI.Events;
 using Prover.SerialProtocol;

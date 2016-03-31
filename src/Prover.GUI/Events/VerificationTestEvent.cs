@@ -1,5 +1,5 @@
 ﻿using Prover.Core.Communication;
-using Prover.Core.VerificationTests;
+using Prover.Core.VerificationManagers;
 
 namespace Prover.GUI.Events
 {

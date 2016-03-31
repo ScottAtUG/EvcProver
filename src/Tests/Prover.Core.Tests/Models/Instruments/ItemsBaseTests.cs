@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Prover.Core.Models.Instruments;
+using Prover.Core.Models.Verification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Prover.Core.Models.Instruments.Tests
+namespace Prover.Core.Models.Verification.Tests
 {
     [TestClass()]
     public class ItemsBaseTests
