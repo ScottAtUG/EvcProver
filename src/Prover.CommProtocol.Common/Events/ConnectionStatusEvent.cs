@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Prover.Core.Events
+namespace Prover.CommProtocol.Common.Events
 {
     public class ConnectionStatusEvent
     {

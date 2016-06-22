@@ -5,10 +5,10 @@ using System.Timers;
 using Caliburn.Micro;
 using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.Unity;
+using Prover.Client;
+using Prover.Client.Events;
+using Prover.Client.Interfaces;
 using Prover.Core.Events;
-using Prover.GUI.Common;
-using Prover.GUI.Common.Events;
-using Prover.GUI.Common.Interfaces;
 using Prover.GUI.Dialogs;
 using Prover.GUI.Screens.Settings;
 

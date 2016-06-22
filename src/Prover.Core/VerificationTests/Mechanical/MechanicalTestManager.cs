@@ -1,12 +1,12 @@
-﻿using System.Threading.Tasks;
-using Caliburn.Micro;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using Prover.CommProtocol.Common;
 using Prover.CommProtocol.Common.Items;
 using Prover.CommProtocol.MiHoneywell;
 using Prover.Core.DriveTypes;
 using Prover.Core.ExternalIntegrations;
 using Prover.Core.Models.Instruments;
+using Reactive.EventAggregator;
+using System.Threading.Tasks;
 
 namespace Prover.Core.VerificationTests.Mechanical
 {

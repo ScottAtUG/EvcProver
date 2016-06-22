@@ -1,19 +1,17 @@
-﻿<UserControl x:Class="Prover.GUI.Common.Controls.PercentageControl"
+﻿<UserControl x:Class="Prover.Client.Controls.PercentageControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Name="parent"
-             xmlns:local="clr-namespace:Prover.GUI.Common.Controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             Background="{DynamicResource MaterialDesignPaper}"
-             xmlns:controls="clr-namespace:Prover.GUI.Common.Controls">
+             Background="{DynamicResource MaterialDesignPaper}">
     <UserControl.Resources>
         <ResourceDictionary>
-            <ImageSource x:Key="PassIcon">..\Resources\success.png</ImageSource>
-            <ImageSource x:Key="FailIcon">..\Resources\error_36.png</ImageSource>
+            <ImageSource x:Key="PassIcon">../Resources/success.png</ImageSource>
+            <ImageSource x:Key="FailIcon">../Resources/error_36.png</ImageSource>
             <SolidColorBrush x:Key="PassColour" Color="ForestGreen" />
             <SolidColorBrush x:Key="FailColour" Color="IndianRed" />
         </ResourceDictionary>

@@ -1,6 +1,6 @@
 ﻿using Prover.Core.VerificationTests.Rotary;
 
-namespace Prover.GUI.Common.Events
+namespace Prover.Client.Events
 {
     public class InstrumentUpdateEvent
     {

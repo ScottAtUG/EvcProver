@@ -1,4 +1,4 @@
-﻿namespace Prover.GUI.Common
+﻿namespace Prover.Client.Interfaces
 {
     public interface IWindowSettings
     {

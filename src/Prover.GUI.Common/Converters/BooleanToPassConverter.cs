@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Prover.GUI.Common.Converters
+namespace Prover.Client.Converters
 {
     public class BooleanToPassConverter : IValueConverter
     {

@@ -7,6 +7,10 @@ using NLog;
 using Prover.CommProtocol.Common.IO;
 using Prover.CommProtocol.Common.Items;
 using Prover.CommProtocol.Common.Messaging;
+using Microsoft.Practices.Unity;
+using Reactive.EventAggregator;
+using Prover.CommProtocol.Common.Events;
+using System.Reactive.Subjects;
 
 namespace Prover.CommProtocol.Common
 {
@@ -22,9 +26,10 @@ namespace Prover.CommProtocol.Common
         ///     A client to communicate with a wide range of EVCs
         /// </summary>
         /// <param name="commPort">Communcations interface to the device</param>
-        protected EvcCommunicationClient(CommPort commPort)
+        protected EvcCommunicationClient(IUnityContainer container, CommPort commPort)
         {
             CommPort = commPort;
+            Container = container;
 
             _receivedObservable = ResponseProcessors.MessageProcessor.ResponseObservable(CommPort.DataReceivedObservable)
                 .Subscribe(msg => { Log.Debug($"[{CommPort.Name}][IN] << {ControlCharacters.Prettify(msg)}"); });
@@ -47,6 +52,7 @@ namespace Prover.CommProtocol.Common
         public abstract bool IsConnected { get; protected set; }
 
         public CancellationTokenSource CancellationTokenSource { get; private set; }
+        public IUnityContainer Container { get; private set; }
 
         public virtual void Dispose()
         {
@@ -71,7 +77,7 @@ namespace Prover.CommProtocol.Common
             }
 
             var response = command.ResponseProcessor.ResponseObservable(CommPort.DataReceivedObservable)
-                .Timeout(TimeSpan.FromSeconds(3))
+                .Timeout(TimeSpan.FromSeconds(5))
                 .FirstAsync()
                 .PublishLast();
 
@@ -82,6 +88,16 @@ namespace Prover.CommProtocol.Common
                 var result = await response;
                 return result;
             }
+        }
+
+        private Subject<ConnectionStatusEvent> _connectionStatusEvent;
+
+        /// <summary>
+        /// Raised whenever a physical connection is established
+        /// </summary>
+        public IObservable<ConnectionStatusEvent> ConnectionStatus
+        {
+            get { return _connectionStatusEvent.AsObservable(); }
         }
 
         /// <summary>
@@ -99,9 +115,12 @@ namespace Prover.CommProtocol.Common
             
             var result = Task.Run(async () =>
             {
+
                 while (!IsConnected)
                 {
                     connectionAttempts++;
+
+                    _connectionStatusEvent.OnNext(new ConnectionStatusEvent(ConnectionStatusEvent.Status.Connecting, connectionAttempts, MaxConnectionAttempts));
                     Log.Info($"[{CommPort.Name}] Connecting to Instrument... Attempt {connectionAttempts} of {MaxConnectionAttempts}");
 
                     try
@@ -126,6 +145,10 @@ namespace Prover.CommProtocol.Common
                         {
                             throw new Exception($"{CommPort.Name} Could not connect to instrument.");
                         }
+                    }
+                    else
+                    {
+                        Container.Resolve<IEventAggregator>().Publish(new ConnectionStatusEvent(ConnectionStatusEvent.Status.Connected));
                     }
                 }
             }, ct);

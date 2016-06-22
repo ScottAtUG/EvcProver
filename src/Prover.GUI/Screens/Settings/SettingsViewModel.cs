@@ -6,10 +6,10 @@ using System.Windows;
 using Caliburn.Micro;
 using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.Unity;
+using Prover.Client.Interfaces;
 using Prover.CommProtocol.Common.IO;
 using Prover.Core.Events;
 using Prover.Core.Settings;
-using Prover.GUI.Common;
 
 namespace Prover.GUI.Screens.Settings
 {

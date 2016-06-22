@@ -4,6 +4,7 @@ using System.Windows;
 using Caliburn.Micro;
 using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.Unity;
+using Prover.Client;
 using Prover.CommProtocol.Common.IO;
 using Prover.CommProtocol.MiHoneywell;
 using Prover.Core.Events;
@@ -12,17 +13,15 @@ using Prover.Core.Settings;
 using Prover.Core.VerificationTests;
 using Prover.Core.VerificationTests.Mechanical;
 using Prover.Core.VerificationTests.Rotary;
-using Prover.GUI.Common;
 using Prover.GUI.Screens.QAProver.VerificationTestViews;
 using Prover.GUI.Screens.Settings;
 using Prover.GUI.Screens.Shell;
 
 namespace Prover.GUI.Screens.QAProver
 {
-    public class StartTestViewModel : ReactiveScreen, IHandle<SettingsChangeEvent>, IHandle<VerificationNotValidEvent>
+    public class StartTestViewModel : ReactiveScreen, IHandle<SettingsChangeEvent>
     {
         private readonly IUnityContainer _container;
-        private bool _miniAtChecked;
 
         public StartTestViewModel(IUnityContainer container)
         {
@@ -60,11 +59,6 @@ namespace Prover.GUI.Screens.QAProver
             VerifySettings();
         }
 
-        public void Handle(VerificationNotValidEvent message)
-        {
-            ScreenManager.ShowDialog(_container, message.ViewModel);
-        }
-
         public async Task CancelCommand()
         {
             await ScreenManager.Change(_container, new MainMenuViewModel(_container));
@@ -76,7 +70,7 @@ namespace Prover.GUI.Screens.QAProver
 
             try
             {
-                var commPort = new SerialPort(InstrumentCommPortName, BaudRate);
+                _container.RegisterInstance(typeof(SerialPort), new SerialPort(InstrumentCommPortName, BaudRate));
 
                 if (IsMiniMaxChecked)
                 {
@@ -94,6 +88,10 @@ namespace Prover.GUI.Screens.QAProver
                         await
                             MechanicalTestManager.Create(_container,
                                 new HoneywellClient(commPort, InstrumentType.MiniAT));
+                }
+                else
+                {
+                    MessageBox.Show("Select an instrument type to continue.");
                 }
                 await ScreenManager.Change(_container, new VerificationTestViewModel(_container, InstrumentTestManager));
             }

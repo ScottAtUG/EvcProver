@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 
-namespace Prover.GUI.Common
+namespace Prover.Client
 {
     public class WindowSettings
     {

@@ -1,14 +1,14 @@
-﻿using System.Threading;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using Microsoft.Practices.Unity;
-using Prover.Core.Events;
-using Prover.GUI.Common;
+using Prover.Client;
+using Prover.CommProtocol.Common.Events;
 using Prover.GUI.Dialogs;
-using Prover.GUI.Screens;
+using PubSub;
+using System.Threading;
 
 namespace Prover.GUI
 {
-    public class ConnectionDialogManager : IHandle<ConnectionStatusEvent>
+    public class ConnectionDialogManager
     {
         private readonly IUnityContainer _container;
         private readonly ConnectionViewModel _viewModel;
@@ -17,12 +17,11 @@ namespace Prover.GUI
         public ConnectionDialogManager(IUnityContainer container)
         {
             _container = container;
-            _container.Resolve<IEventAggregator>().Subscribe(this);
-
+                
             _viewModel = new ConnectionViewModel(_container);
         }
 
-        public void Handle(ConnectionStatusEvent message)
+        public void HandleEvent(ConnectionStatusEvent message)
         {
             OpenConnectDialog();
 

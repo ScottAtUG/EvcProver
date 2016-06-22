@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Caliburn.Micro;
 using Prover.CommProtocol.Common;
 using Prover.CommProtocol.Common.Items;
-using Prover.Core.Communication;
 using Prover.Core.Models.Instruments;
+using Reactive.EventAggregator;
 
 namespace Prover.Core.VerificationTests.Mechanical
 {

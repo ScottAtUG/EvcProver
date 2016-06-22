@@ -1,4 +1,4 @@
-﻿namespace Prover.GUI.Common.Events
+﻿namespace Prover.Client.Events
 {
     public class VerificationTestEvent
     {

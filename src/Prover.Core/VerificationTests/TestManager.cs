@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Caliburn.Micro;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using NLog;
 using Prover.CommProtocol.Common;
 using Prover.CommProtocol.Common.Items;
-using Prover.Core.Events;
 using Prover.Core.EVCTypes;
+using Prover.Core.Events;
 using Prover.Core.ExternalIntegrations;
 using Prover.Core.Models.Instruments;
 using Prover.Core.Settings;
 using Prover.Core.Storage;
+using Reactive.EventAggregator;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using LogManager = NLog.LogManager;
 
 namespace Prover.Core.VerificationTests
@@ -93,8 +93,7 @@ namespace Prover.Core.VerificationTests
                 {
                     var liveValue = await CommunicationClient.LiveReadItemValue(item.Key);
                     item.Value.ValueQueue.Enqueue(liveValue.NumericValue);
-                    Container.Resolve<IEventAggregator>()
-                        .PublishOnBackgroundThread(new LiveReadEvent(item.Key, liveValue.NumericValue));
+                    Container.Resolve<IEventAggregator>().Publish(new LiveReadEvent(item.Key, liveValue.NumericValue));
                 }
             } while (liveReadItems.Any(x => !x.Value.IsStable()));
 
@@ -206,8 +205,11 @@ namespace Prover.Core.VerificationTests
 
         public async Task RunVerifier()
         {
-            Verifier = Container.Resolve<IVerifier>(new ParameterOverride("commClient", CommunicationClient), new ParameterOverride("instrument", Instrument));
-            var success = await Verifier.Verify();
+            if (Container.IsRegistered<IVerifier>())
+            {
+                Verifier = Container.Resolve<IVerifier>(new ParameterOverride("commClient", CommunicationClient), new ParameterOverride("instrument", Instrument));
+                var success = await Verifier.Verify();
+            }
         }
     }
 }

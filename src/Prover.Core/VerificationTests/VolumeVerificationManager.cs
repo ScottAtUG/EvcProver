@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using Caliburn.Micro;
-using MccDaq;
+﻿using MccDaq;
 using NLog;
 using Prover.CommProtocol.Common;
 using Prover.Core.ExternalDevices.DInOutBoards;
 using Prover.Core.Models.Instruments;
+using Reactive.EventAggregator;
+using System.Threading.Tasks;
 using LogManager = NLog.LogManager;
 
 namespace Prover.Core.VerificationTests

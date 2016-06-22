@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Microsoft.Practices.Unity;
+using Prover.Client.Events;
 using Prover.Core.VerificationTests;
-using Prover.GUI.Common.Events;
 using Prover.GUI.Reports;
 
 namespace Prover.GUI.Screens.QAProver.VerificationTestViews

@@ -188,7 +188,8 @@ namespace Prover.CommProtocol.MiHoneywell.Messaging.Requests
 
             var numberString = Number.ToString().PadLeft(3, Convert.ToChar("0"));
             var valueString = Value.PadLeft(8, Convert.ToChar("0"));
-            Command = $"{CommandPrefix},{accessCode}{ControlCharacters.STX}{numberString},{valueString}";
+            var cmd = $"{CommandPrefix},{accessCode}{ControlCharacters.STX}{numberString},{valueString}";
+            Command = BuildCommand(cmd);
         }
 
         public int Number { get; }

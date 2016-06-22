@@ -1,8 +1,8 @@
 ﻿using Caliburn.Micro;
 using Microsoft.Practices.Unity;
 using NLog;
+using Prover.Client.Events;
 using Prover.CommProtocol.Common.Items;
-using Prover.GUI.Common.Events;
 using LogManager = NLog.LogManager;
 
 namespace Prover.GUI.Screens.QAProver.VerificationTestViews.PTVerificationViews

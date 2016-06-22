@@ -7,15 +7,15 @@ using System.Windows;
 using Caliburn.Micro;
 using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.Unity;
+using Prover.Client.Events;
+using Prover.Client.Interfaces;
 using Prover.Core.Events;
 using Prover.Core.VerificationTests;
 using Prover.Core.VerificationTests.Rotary;
-using Prover.GUI.Common;
-using Prover.GUI.Common.Events;
 
 namespace Prover.GUI.Screens.QAProver
 {
-    internal class LiveReadViewModel : ReactiveScreen, IWindowSettings, IHandle<LiveReadEvent>,
+    internal class LiveReadViewModel : ReactiveScreen, IWindowSettings,
         IHandle<InstrumentUpdateEvent>
     {
         private readonly IUnityContainer _container;

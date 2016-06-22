@@ -3,11 +3,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Microsoft.Practices.Unity;
+using Prover.Client;
 using Prover.CommProtocol.Common;
 using Prover.CommProtocol.Common.Items;
 using Prover.Core.ExternalIntegrations;
 using Prover.Core.Models.Instruments;
-using Prover.GUI.Common;
 using UnionGas.MASA.Dialogs.CompanyNumberDialog;
 
 namespace UnionGas.MASA.Verifiers
@@ -20,9 +20,9 @@ namespace UnionGas.MASA.Verifiers
 
         public CompanyNumberVerifier(IUnityContainer container, EvcCommunicationClient commClient, Instrument instrument)
         {
-            this.Container = container;
-            this.CommClient = commClient;
-            this.Instrument = instrument;
+            Container = container;
+            CommClient = commClient;
+            Instrument = instrument;
         }
 
         public IUnityContainer Container { get; set; }

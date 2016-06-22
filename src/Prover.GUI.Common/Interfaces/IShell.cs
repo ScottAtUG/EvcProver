@@ -1,4 +1,4 @@
-﻿namespace Prover.GUI.Common.Interfaces
+﻿namespace Prover.Client.Interfaces
 {
     public interface IShell
     {

@@ -2,9 +2,10 @@
 using Caliburn.Micro;
 using Caliburn.Micro.ReactiveUI;
 using Microsoft.Practices.Unity;
-using Prover.GUI.Common.Events;
+using Prover.Client.Events;
+using Prover.Client.Interfaces;
 
-namespace Prover.GUI.Common
+namespace Prover.Client
 {
     public class ScreenManager
     {

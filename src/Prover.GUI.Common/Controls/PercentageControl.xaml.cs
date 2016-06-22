@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Prover.GUI.Common.Controls
+namespace Prover.Client.Controls
 {
     /// <summary>
     ///     Interaction logic for PercentageControl.xaml

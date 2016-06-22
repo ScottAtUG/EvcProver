@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Prover.GUI.Common.Controls
+namespace Prover.Client.Controls
 {
     public class PercentageControlViewModel
     {

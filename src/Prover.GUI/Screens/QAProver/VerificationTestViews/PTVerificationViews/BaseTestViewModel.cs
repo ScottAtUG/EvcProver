@@ -1,8 +1,8 @@
 ﻿using System.Windows.Media;
 using Caliburn.Micro;
 using Caliburn.Micro.ReactiveUI;
+using Prover.Client.Events;
 using Prover.Core.Models.Instruments;
-using Prover.GUI.Common.Events;
 
 namespace Prover.GUI.Screens.QAProver.VerificationTestViews.PTVerificationViews
 {

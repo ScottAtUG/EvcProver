@@ -1,12 +1,12 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Caliburn.Micro;
-using Prover.CommProtocol.Common;
+﻿using Prover.CommProtocol.Common;
 using Prover.CommProtocol.Common.Items;
 using Prover.Core.Communication;
 using Prover.Core.ExternalDevices.DInOutBoards;
 using Prover.Core.Models.Instruments;
+using Reactive.EventAggregator;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Prover.Core.VerificationTests.Rotary
 {
